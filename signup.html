@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<h2>Sign Up</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  
+  <!-- First and Last Name -->
+  <label for="id_first_name">First Name:</label>
+  {{ form.first_name }}
+
+  <label for="id_last_name">Last Name:</label>
+  {{ form.last_name }}
+
+  <!-- Profile Picture -->
+  <label for="id_profile_picture">Profile Picture:</label>
+  {{ form.profile_picture }}
+
+  <!-- Username -->
+  <label for="id_username">Username:</label>
+  {{ form.username }}
+
+  <!-- Email -->
+  <label for="id_email">Email:</label>
+  {{ form.email }}
+
+  <!-- User Type -->
+  <label for="id_user_type">User Type:</label>
+  {{ form.user_type }}
+
+  <!-- Passwords -->
+  <label for="id_password1">Password:</label>
+  {{ form.password1 }}
+
+  <label for="id_password2">Confirm Password:</label>
+  {{ form.password2 }}
+
+  <!-- Address Fields -->
+  <label for="id_address_line1">Address Line 1:</label>
+  {{ form.address_line1 }}
+
+  <label for="id_city">City:</label>
+  {{ form.city }}
+
+  <label for="id_state">State:</label>
+  {{ form.state }}
+
+  <label for="id_pincode">Pincode:</label>
+  {{ form.pincode }}
+
+  <!-- Submit -->
+  <button type="submit">Register</button>
+
+</form>
+
+<!-- Error display -->
+{% if form.errors %}
+  <div class="errorlist">
+    <h3>Form Errors:</h3>
+    <ul>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ field.label }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+{% endblock %}
